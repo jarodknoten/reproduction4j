@@ -12,7 +12,10 @@ public class Population {
 		Person eve = new Person();
 		
 		adam.setName("Adam");
+		adam.setSex("Male");
+		
 		eve.setName("Eve");
+		eve.setSex("Female");
 		
 		this.census.add(adam);
 		this.census.add(eve);

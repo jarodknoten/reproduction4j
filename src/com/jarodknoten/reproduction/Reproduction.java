@@ -13,6 +13,7 @@ public class Reproduction {
 	
 
 	public static void main(String[] args) {
+		ReproUtil.clearConsole();
 		System.out.println("Simulating " + simDays + " Days...");
 		
 		Day day = new Day();
@@ -20,7 +21,8 @@ public class Reproduction {
 		
 		//main simulation loop
 		for(int i = 0; i < getSimDays(); i++) {
-			System.out.println("Starting Day " + day.getDay());
+
+			day.startDay(pop);
 			day.endDay(pop);
 			
 			if(pop.getCensus().size() == 0) {

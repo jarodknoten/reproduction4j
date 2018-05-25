@@ -1,6 +1,7 @@
 package com.jarodknoten.reproduction;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class Person {
 	
@@ -10,20 +11,23 @@ public class Person {
 	private boolean alive;
 	private Integer deathAge;
 	private String sex;
-	private String orientation;
+	private String sexualPreference;
+	private UUID id;
 	
 	
 	Person(){
 
-		Integer tempDeath = predictDeath(0, 36500) ;
+		Integer tempDeath = ReproUtil.randomNumber(0, 36500) ;
 		
 		this.setName("No Name");
 		this.setBirthYear(0);
 		this.setAge(0);
 		this.setAlive(true);
 		this.setDeathAge(tempDeath);
+		this.setId(UUID.randomUUID());
+		this.setSexualPreference(generateSexPref());
 		
-		System.out.println("A new person has been created");
+		System.out.println("Happy Birthday to...");
 		this.toString();
 		
 	}
@@ -31,12 +35,14 @@ public class Person {
 	public String toString() {
 		
 		System.out.println("---------------------------------");
+		System.out.println("ID: " + this.getId());
 		System.out.println("Name: " + this.getName());
 		System.out.println("BirthYear: " + this.getBirthYear());
 		System.out.println("Age: " + (this.getAge() / 365 ) + " years old");
 		System.out.println("Is Alive: " + this.isAlive());
 		System.out.println("Will die on Day: " + this.getDeathAge());
 		System.out.println("Gender: " + this.getSex());
+		System.out.println("Sexual Preference: " + this.getSexualPreference());
 		System.out.println("---------------------------------");
 		System.out.println("");
 		
@@ -44,17 +50,22 @@ public class Person {
 		
 	}
 	
+	public static String generateSexPref() {
+		
+		String [] sexPrefs = {"Male", "Female", "Any"};
+		Random random = new Random();
+		
+		//Randomly select an index
+		int randomIndex = random.nextInt(sexPrefs.length);
+		
+		return sexPrefs[randomIndex];
+		
+	}
+	
 	/*
 	 * Getters and Setters
 	 * 
 	 */
-	public static int predictDeath(int min, int max) {
-
-	    Random rand = new Random();
-	    int randomNum = rand.nextInt((max - min) + 1) + min;
-
-	    return randomNum;
-	}
 
 	public String getName() {
 		return this.name;
@@ -104,12 +115,20 @@ public class Person {
 		this.sex = sex;
 	}
 
-	public String getOrientation() {
-		return this.orientation;
+	public UUID getId() {
+		return id;
 	}
 
-	public void setOrientation(String orientation) {
-		this.orientation = orientation;
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getSexualPreference() {
+		return sexualPreference;
+	}
+
+	public void setSexualPreference(String sexualPreference) {
+		this.sexualPreference = sexualPreference;
 	}
 
 }

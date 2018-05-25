@@ -10,24 +10,29 @@ public class Day {
 		this.setDay(0);
 	}
 	
-	public void endDay(Population pop) {
+	public void startDay(Population pop) {
 		
 		List<Person> census = pop.getCensus();
-		
 		
 		//Age the population
 		for(int i = 0; i < pop.getCensus().size(); i++ ) {
 			
 			Person thisPerson = census.get(i);
-			System.out.println(thisPerson.getDeathAge() + " " + this.getDay());
 			
 			//Does this person die today?
 			if( thisPerson.getDeathAge().equals(this.getDay()) ) {
-				System.out.println("killing");
+				
 				thisPerson.setAlive(false);
 				
 				Banners.showRIP();
-				System.out.println(thisPerson.getName() + " has died at the age of " + thisPerson.getAge());
+				if(pop.getCensus().size() == 1){
+					System.out.println(thisPerson.getName() + " has died alone at the age of " + (thisPerson.getAge() / 365 ) + " years old as the last survivor");
+					System.out.println("Humanity lasted " + this.getDay() + " days.");
+				}
+				else{
+					System.out.println(thisPerson.getName() + " has died at the age of " + (thisPerson.getAge() / 365 ) + " years old");
+				}
+				
 				
 				try {
 					Thread.sleep(4000);
@@ -39,12 +44,25 @@ public class Day {
 			
 			//If the person is alive do person stuff
 			if( thisPerson.isAlive() ) {
+				
+				if( pop.getCensus().size() > 1) {
+					Encounter.chanceEncounter(thisPerson, pop);
+				}
+				
+				
+				//Age the person their day is over
 				thisPerson.setAge(thisPerson.getAge() + 1);
-				thisPerson.toString();
 			}
 			
 			
 		}
+		
+	}
+	
+	public void endDay(Population pop) {
+		
+		List<Person> census = pop.getCensus();
+		
 		
 		//kill off the dead
 		for(int i = 0; i < pop.getCensus().size(); i++ ) {
@@ -54,9 +72,9 @@ public class Day {
 			}
 		}
 		
-		System.out.println("End of Day " + getDay());
-		System.out.println("Current Population " + pop.getCensus().size() );
 		setDay(getDay() + 1);
+		
+		//ReproUtil.clearConsole();
 		
 	}
 
