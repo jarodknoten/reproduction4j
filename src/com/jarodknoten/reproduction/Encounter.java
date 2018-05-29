@@ -7,8 +7,15 @@ public class Encounter {
 	
 	
 	//This is a regular encounter
-	Encounter(Person a, Person b, Population pop){
+	public static void stageEncounter(Person a, Person b, Population pop){
+		
+		//lets check the both meet the encounter minimun age
+		if(a.getAge() > 5475 && b.getAge() > 5475){
 			
+			//The meeting takes place
+			meeting(a, b);
+			
+		}
 		
 	}
 	
@@ -25,7 +32,7 @@ public class Encounter {
 			
 			//Do they chat. Checking using bitwise operator for speed (even / odd)
 			if ( (i & 1) == 0 ) {
-				System.out.println("Encounter did not happen");
+				//System.out.println("Encounter did not happen");
 				break;
 			}
 			
@@ -33,9 +40,27 @@ public class Encounter {
 			encUUID = thatPerson.getId();
 			
 			if(!a.getId().equals(encUUID)) {
-				System.out.println("Encounter Happened");
+				//System.out.println("Encounter Happened");
+				stageEncounter(a, thatPerson, pop);
 			}
 			
+		}
+		
+	}
+	
+	public static void meeting(Person a, Person b) {
+		
+		System.out.println("An ecounter is happening " + a.getSexualPreference() + " " + b.getSex());
+		
+		if( (a.getSexualPreference().equals( b.getSex() ) || b.getSexualPreference().equals("Any") )  && 
+			(b.getSexualPreference().equals( a.getSex() ) || a.getSexualPreference().equals("Any")  )
+		  ) {
+		
+			System.out.println("An ecounter happed giggity");
+			
+		}
+		else {
+			System.out.println("asdasdasd");
 		}
 		
 	}

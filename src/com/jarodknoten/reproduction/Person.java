@@ -13,6 +13,7 @@ public class Person {
 	private String sex;
 	private String sexualPreference;
 	private UUID id;
+	private boolean sigOther;
 	
 	
 	Person(){
@@ -20,12 +21,14 @@ public class Person {
 		Integer tempDeath = ReproUtil.randomNumber(0, 36500) ;
 		
 		this.setName("No Name");
+		this.setSex("Other");
 		this.setBirthYear(0);
 		this.setAge(0);
 		this.setAlive(true);
 		this.setDeathAge(tempDeath);
 		this.setId(UUID.randomUUID());
 		this.setSexualPreference(generateSexPref());
+		this.setSigOther(false);
 		
 		System.out.println("Happy Birthday to...");
 		this.toString();
@@ -37,12 +40,14 @@ public class Person {
 		System.out.println("---------------------------------");
 		System.out.println("ID: " + this.getId());
 		System.out.println("Name: " + this.getName());
+		System.out.println("Sex: " + this.getSex());
 		System.out.println("BirthYear: " + this.getBirthYear());
 		System.out.println("Age: " + (this.getAge() / 365 ) + " years old");
 		System.out.println("Is Alive: " + this.isAlive());
 		System.out.println("Will die on Day: " + this.getDeathAge());
 		System.out.println("Gender: " + this.getSex());
 		System.out.println("Sexual Preference: " + this.getSexualPreference());
+		System.out.println("Has Signifigant other: " + this.hasSigOther());
 		System.out.println("---------------------------------");
 		System.out.println("");
 		
@@ -129,6 +134,14 @@ public class Person {
 
 	public void setSexualPreference(String sexualPreference) {
 		this.sexualPreference = sexualPreference;
+	}
+
+	public boolean hasSigOther() {
+		return sigOther;
+	}
+
+	public void setSigOther(boolean sigOther) {
+		this.sigOther = sigOther;
 	}
 
 }

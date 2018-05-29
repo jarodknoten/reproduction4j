@@ -13,9 +13,11 @@ public class Population {
 		
 		adam.setName("Adam");
 		adam.setSex("Male");
+		adam.setSexualPreference("Female");
 		
 		eve.setName("Eve");
 		eve.setSex("Female");
+		eve.setSexualPreference("Male");
 		
 		this.census.add(adam);
 		this.census.add(eve);
